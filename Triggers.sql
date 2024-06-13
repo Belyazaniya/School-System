@@ -27,15 +27,6 @@ BEGIN
 END;
 
 
-CREATE TRIGGER after_teacher_insert
-AFTER INSERT ON Teachers
-FOR EACH ROW
-BEGIN
-    INSERT INTO TeacherLogs (TeacherID, Action, ActionDate)
-    VALUES (NEW.TeacherID, 'INSERT', NOW());
-END;
-
-
 CREATE TRIGGER after_enrollment_insert
 AFTER INSERT ON Enrollments
 FOR EACH ROW
@@ -70,22 +61,6 @@ BEGIN
 END;
 
 
-CREATE TRIGGER after_class_update
-AFTER UPDATE ON Classes
-FOR EACH ROW
-BEGIN
-    INSERT INTO ClassLogs (ClassID, OldTeacherID, NewTeacherID, ChangeDate)
-    VALUES (NEW.ClassID, OLD.TeacherID, NEW.TeacherID, NOW());
-END;
-
-
-CREATE TRIGGER after_subject_update
-AFTER UPDATE ON Subjects
-FOR EACH ROW
-BEGIN
-    INSERT INTO SubjectLogs (SubjectID, OldTeacherID, NewTeacherID, ChangeDate)
-    VALUES (NEW.SubjectID, OLD.TeacherID, NEW.TeacherID, NOW());
-END;
 
 
 
